@@ -20,6 +20,7 @@ Boid boid;
 PVector target;
 Head head;
 Boolean debug = false;
+Boolean isWandering = false;
 int ringCnt = 0;
 int ringColor;
 int _a = 200;
@@ -80,9 +81,9 @@ void draw() {
     ((Circle) pool.get(i)).display(i);
   }
    
-  //boid.wander();
+  if (isWandering) boid.wander();
+  else             boid.arrive(target);
   boid.run();
-  boid.arrive(target);
    
   Circle c = new Circle(boid.loc.x, boid.loc.y, 20);
   pool.add(c);

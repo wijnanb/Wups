@@ -26,7 +26,7 @@ class Boid {
   
   void run() {
     update();
-    //borders();
+    borders();
     //render();
   }
   
@@ -66,7 +66,7 @@ class Boid {
     acc.add(steer(target,false));  // Steer towards it
     
     // Render wandering circle, etc. 
-    //if (debug) drawWanderStuff(loc,circleloc,target,wanderR);
+    if (debug) drawWanderStuff(loc,circleloc,target,wanderR);
     
   }  
   
