@@ -19,8 +19,8 @@ PImage b;
 Boid boid;
 PVector target;
 Head head;
-Boolean debug = false;
-Boolean isWandering = false;
+Boolean debug = true;
+Boolean isWandering = true;
 int ringCnt = 0;
 int ringColor;
 int _a = 200;
@@ -31,7 +31,7 @@ int theme_cnt = 0;
 
 void setup()
 {
-  size(1920, 1078, OPENGL);
+  size(1024, 700, OPENGL);
   frameRate(60);
   //smooth();
   
@@ -98,9 +98,7 @@ void draw() {
 
 void keyPressed() {
   if (keyCode == ENTER) {
-    currentTheme = (currentTheme + 1) % themes.length;
-    newColorScheme = themes[currentTheme];
-    theme_cnt = 1;
+    isWandering = !isWandering;
   }
   else if (key == CODED) {
     if (keyCode == RIGHT) {
@@ -199,10 +197,13 @@ class Head {
     double a2 = angle - Math.PI/3;
     
     if ( debug ) {
-      // target
-      stroke(255);
-      strokeWeight(1);
-      line(x, y, target.x, target.y);
+      
+      if ( !isWandering ) {
+        // target
+        stroke(255);
+        strokeWeight(1);
+        line(x, y, target.x, target.y);
+      }
       
       // direction
       stroke(255);
