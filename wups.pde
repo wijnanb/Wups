@@ -107,8 +107,8 @@ void draw() {
 }
 
 void keyPressed() {
-  if (keyCode == ENTER) {
-    isWandering = !isWandering;
+  //if (keyCode == ENTER) {
+  //  isWandering = !isWandering;
 
  /* if (key == CODED && keyCode == KeyEvent.KEYCODE_BACK) {
     keyCode = 0;  
