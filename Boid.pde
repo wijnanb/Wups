@@ -1,7 +1,11 @@
+import processing.opengl.*;
+
+
+ 
+
 // Wander
 // Daniel Shiffman <http://www.shiffman.net>
 // The Nature of Code
-
 // The "Boid" class (for wandering)
 
 class Boid {

@@ -1,4 +1,7 @@
-import processing.opengl.*;
+import ddf.minim.*;
+ 
+Minim minim;
+AudioPlayer groove;
 
 ArrayList pool;
 int numCircles = 100;
@@ -19,7 +22,8 @@ PImage b;
 Boid boid;
 PVector target;
 Head head;
-Boolean debug = true;
+
+Boolean debug = false;
 Boolean isWandering = true;
 int ringCnt = 0;
 int ringColor;
@@ -32,13 +36,14 @@ int theme_cnt = 0;
 void setup()
 {
   size(1024, 700, OPENGL);
+
   frameRate(60);
   //smooth();
-  
   currentTheme = (int) Math.round( Math.random() * themes.length );
   newColorScheme = colorScheme = themes[currentTheme];
   imageMode(CENTER);
-  
+   minim = new Minim(this);
+  groove = minim.loadFile("wups.mp3", 512);
   pool = new ArrayList();
   
   boid = new Boid(new PVector(width/4,height/4),7.0,0.1);
@@ -92,13 +97,29 @@ void draw() {
   head.display();
    
   if (mousePressed) {
-    target = new PVector(mouseX,mouseY);
+     // tts.speak("All hail to the redis bitch"); (lib breaks on compiletime)
+     groove.play();
+      currentTheme = (currentTheme + 1) % themes.length;
+      newColorScheme = themes[currentTheme];
+      theme_cnt = 1;
+      target = new PVector(mouseX,mouseY);
   }
 }
 
 void keyPressed() {
   if (keyCode == ENTER) {
     isWandering = !isWandering;
+
+ /* if (key == CODED && keyCode == KeyEvent.KEYCODE_BACK) {
+    keyCode = 0;  
+    currentTheme = (currentTheme + 1) % themes.length;
+    newColorScheme = themes[currentTheme];
+    theme_cnt = 1;
+    } 
+  else */ if (keyCode == ENTER) {
+    currentTheme = (currentTheme + 1) % themes.length;
+    newColorScheme = themes[currentTheme];
+    theme_cnt = 1;
   }
   else if (key == CODED) {
     if (keyCode == RIGHT) {
